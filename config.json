@@ -1,6 +1,7 @@
 {
     "EXE_FILE_PATH": "C:/Program Files (x86)/Steam/steamapps/common/Portal 2/portal2.exe",
-    "STREAM_ID":"V2R3rIux_JI",
+    "LOGS_DIR": "C:/Users/matiy/Documents/Chat-To-Source/logs",
+    "STREAM_ID":"HvJypNdXisM",
     "CHAT_INTERVAL": 0.100,
     "MAX_COMMAND_VALUE": 200,
     "INDIVIDUAL_MAX_COMMAND_VALUE": {"sv_gravity": 100, "sv_noclipspeed": 10},
