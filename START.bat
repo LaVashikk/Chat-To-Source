@@ -1,5 +1,2 @@
-
-
 python main.py
-
 pause
