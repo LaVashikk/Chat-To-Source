@@ -1,0 +1,20 @@
+{
+    "EXE_FILE_PATH": "C:/Program Files (x86)/Steam/steamapps/common/Portal 2/portal2.exe",
+    "STREAM_ID":"V2R3rIux_JI",
+    "CHAT_INTERVAL": 0.100,
+    "MAX_COMMAND_VALUE": 200,
+    "INDIVIDUAL_MAX_COMMAND_VALUE": {"sv_gravity": 100, "sv_noclipspeed": 10},
+
+    
+    "ENABLE_GAME_BREAKERS_COMMAND": true,
+    "ENABLE_CHAOS_CREATORS_COMMAND": true,
+    "ENABLE_PLAYFUNCTION_KILLERS_COMMAND": false,
+    "ENABLE_GAMEPLAY_HINDERERS_COMMAND": false,
+    "ENABLE_IRRITATION_INVOKERS_COMMAND": false,
+
+
+    "CORRUPTED_ENTITY": ["player", "worldspawn", "portal_2dbase", "generic_actor", "mortarshell", "activator", "self", 
+            "error", "blob", "world_items", "npc_hover_turret"],
+    "CORRUPTED_SCRIPTS": ["GetPlayer"]
+
+}
