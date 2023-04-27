@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Чат стрима</title>
+    <!-- Стили для html страницы -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #chat {
+            position: relative;
+            height: 40px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .message {
+            display: inline-block;
+            font-size: 1.2rem;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #5DADE2;
+            color: #fff;
+            white-space: nowrap;
+            position: absolute;
+            right: 0;
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Чат контейнер -->
+    <div id="chat"></div>
+    <!-- Скрипт для анимации сообщений и получения сообщений с сервера -->
+    <script>
+        const chat = document.getElementById("chat");
+        let rightOffset = 0;
+
+        // Функция для создания сообщений в чате и анимации их движения
+        function createMarqueeMessage(messageText) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            messageElement.innerHTML = messageText;
+            chat.appendChild(messageElement);
+            const speed = 150;
+            const desiredGap = 200;
+    
+            const animationDuration = (chat.offsetWidth + messageElement.offsetWidth) / speed;
+    
+            const animationDelay = desiredGap / speed;
+            rightOffset += messageElement.offsetWidth + desiredGap;
+    
+            setTimeout(() => {
+                messageElement.style.right = `-${rightOffset}px`;
+                messageElement.style.animationName = "scroll";
+                messageElement.style.animationDuration = `${animationDuration}s`;
+                messageElement.style.animationTimingFunction = "linear";
+                messageElement.style.animationIterationCount = "once";
+                messageElement.style.animationFillMode = "forwards";
+                messageElement.style.animationDelay = `${animationDelay}s`;
+            }, 0);
+    
+    
+            setTimeout(() => {
+                chat.removeChild(messageElement);
+                rightOffset -= messageElement.offsetWidth + desiredGap;
+            }, (animationDuration + animationDelay + (rightOffset / speed)) * 1000);
+        }
+
+        // Получаем сообщения с сервера
+        const evtSource = new EventSource("/events");
+        evtSource.onmessage = function (event) {
+            const messageText = event.data.split(',')[0];
+            createMarqueeMessage(messageText);
+        };
+
+        // Keyframes анимации scroll
+        const style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = `
+        @keyframes scroll {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(calc(-100% - 100vw));
+        }
+    }
+    `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
