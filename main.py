@@ -27,6 +27,8 @@ blocked_command = []
     + Блокировку ent команд
 * Добавить поддержку DonationAlert (необязательно)
 * Разбить код на необходимые составляющие (необязательно)
+* Фикс max_command_value = config['INDIVIDUAL_MAX_COMMAND_VALUE'].get(command.split()[0], config['MAX_COMMAND_VALUE'])
+* Добавить виджет для OBS
 """
 
 def write_log(chat: list) -> None:
