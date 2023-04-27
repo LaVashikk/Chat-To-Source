@@ -1,21 +1,21 @@
 {
     "EXE_FILE_PATH": "C:/Program Files (x86)/Steam/steamapps/common/Portal 2/portal2.exe",
     "LOGS_DIR": "C:/Users/matiy/Documents/Chat-To-Source/logs",
-    "STREAM_ID":"HvJypNdXisM",
+    "STREAM_ID":"8IysVNm7Q1w",
     "CHAT_INTERVAL": 0.100,
-    "MAX_COMMAND_VALUE": 200,
-    "INDIVIDUAL_MAX_COMMAND_VALUE": {"sv_gravity": 100, "sv_noclipspeed": 10},
+    "MAX_COMMAND_VALUE": 256,
+    "INDIVIDUAL_MAX_COMMAND_VALUE": {"sv_gravity": 10000, "sv_noclipspeed": 10},
 
     
     "ENABLE_GAME_BREAKERS_COMMAND": true,
-    "ENABLE_CHAOS_CREATORS_COMMAND": true,
+    "ENABLE_CHAOS_CREATORS_COMMAND": false,
     "ENABLE_PLAYFUNCTION_KILLERS_COMMAND": false,
     "ENABLE_GAMEPLAY_HINDERERS_COMMAND": false,
     "ENABLE_IRRITATION_INVOKERS_COMMAND": false,
 
 
     "CORRUPTED_ENTITY": ["player", "worldspawn", "portal_2dbase", "generic_actor", "mortarshell", "activator", "self", 
-            "error", "blob", "world_items", "npc_hover_turret"],
+            "error", "blob", "world_items", "npc_hover_turret", "point_broadcastclientcommand", "env_portal_credits"],
     "CORRUPTED_SCRIPTS": ["GetPlayer"]
 
 }

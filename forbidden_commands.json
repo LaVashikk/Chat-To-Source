@@ -1,16 +1,16 @@
 {
-    "GAME_BREAKERS": ["exit", "quit", "_restart", "crash", "buildmodelforworld", "buildcubemaps", "test", 
-            "setmodel", "editor_toggle" ], 
+    "GAME_BREAKERS": ["exit", "quit", "_restart", "crash", "buildmodelforworld", "buildcubemaps", "test_", 
+            "setmodel", "editor_toggle", "vgui_runscript"], 
 
     "CHAOS_CREATORS": ["cpu_level", "gpu_level", "datacachesize", "alias", "createhairball", "fps_max", "mat_norendering",  
-            "sv_benchmark_force_start"], 
+            "sv_benchmark_force_start", "mat_fillrate", "singlestep", "exec"], 
 
     "PLAYFUNCTION_KILLERS": ["bind", "killserver", "kick", "map", "demo", "stopgame", "connect", "mat_reversedepth"], 
 
     "GAMEPLAY_HINDERERS": ["changelevel", "changelevel2", "respawn_entities", "reload", "snd_", "disconnect",     
     "kill", "restart", "explode", "sensitivity", "m_yaw", "m_pitch", "hurtmeas", "host_framerate",
-            "sv_noclip" ], 
+            "sv_noclip", "r_drawvgui" ], 
 
-    "IRRITATION_INVOKERS": ["fadeout", "viewanim", "ch_createjalopy", "ch_createjeep", "explodevector", "r_drawlightinfo", 
-            "save", "load", "mat_compressedtextures", "m_rawinput", "mat_hdr_level", "fire_rocket_projectile"]
+    "IRRITATION_INVOKERS": ["fadeout", "viewanim", "ch_create", "explodevector", "r_drawlightinfo", 
+            "save", "load", "mat_compressedtextures", "m_rawinput", "mat_hdr_level", "fire_rocket_projectile", "pause", "r_farz","left","right","moveup","movedown","back"]
 }
