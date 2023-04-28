@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Чат запреток</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        @keyframes pulse {
+            0% {
+              box-shadow: 0 0 3px rgba(255, 0, 0, 0.7),
+                          0 0 5px rgba(255, 0, 0, 0.7),
+                          0 0 10px rgba(255, 0, 0, 0.7);
+            }
+            50% {
+              box-shadow: 0 0 8px rgba(255, 0, 0, 0.7),
+                          0 0 15px rgba(255, 0, 0, 0.7),
+                          0 0 20px rgba(255, 0, 0, 0.7);
+            }
+            100% {
+              box-shadow: 0 0 3px rgba(255, 0, 0, 0.7),
+                          0 0 5px rgba(255, 0, 0, 0.7),
+                          0 0 10px rgba(255, 0, 0, 0.7);
+            }
+          }
+
+          html, body {
+            height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            background-color: transparent;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+          
+          #chat {
+              overflow: hidden;
+              height: 90vh;
+            width: 90vw;
+              background-color: rgba(0, 0, 0, 0.5); /* черный фон с прозрачностью 50% */
+              border: 2px solid rgba(255, 0, 0, 0.5);
+              border-radius: 10px;
+              position: relative;
+              padding-bottom: 2%;
+              animation: pulse 10s infinite; /* более плавная пульсация */
+              max-width: 900px;
+          }
+
+          .message {
+            font-size: 8vh;
+              opacity: 0;
+              padding: 5px;
+              border-bottom: none;
+              transition: opacity 0.3s ease-in, transform 0.3s ease-out;
+              position: absolute;
+              bottom: 2%;
+              left: 50%;
+              max-height: calc(100% - 2%);
+              max-width: calc(100% - 2%);
+              color: white; /* белый текст сообщений */
+              transform: translate(-50%, 0);
+          }
+
+    </style>
+</head>
+<body>
+    <div id="chat"></div>
+    <script>
+        const chat = document.getElementById("chat");
+        const animationDuration = 3;
+        let source = new EventSource("/events");
+
+        // Создаем очередь сообщений
+        let messageQueue = [];
+
+        // Функция для обработки следующего сообщения из очереди
+        function displayMessage() {
+            if (messageQueue.length === 0) {
+                return;
+            }
+
+            let data = messageQueue.shift().split(',');
+            let message_element = document.createElement("div");
+
+            message_element.classList.add("message");
+            message_element.innerText = data[0];
+            chat.appendChild(message_element);
+
+            let elementsInChat = Array.from(chat.querySelectorAll(".message"));
+            let displayedElements = elementsInChat.filter(el => el.style.opacity === "1");
+
+            displayedElements.reverse().forEach((elem, index) => {
+                setTimeout(() => {
+                  // Используем vh единицы для translateY
+                  elem.style.transform = `translate(-50%, -${10 * (index + 1)}vh)`;
+                }, 100);
+              });
+
+              setTimeout(() => {
+                message_element.style.opacity = "1";
+                message_element.style.transform = "translate(-50%, 0)";
+              }, 100);
+
+            let display_time = parseInt(data[1]) * 1000;
+            setTimeout(() => {
+                message_element.style.opacity = "0";
+            }, display_time);
+
+            setTimeout(() => {
+                chat.removeChild(message_element);
+                displayMessage(); // Обработка следующего сообщения
+            }, display_time + animationDuration * 1000);
+        }
+
+        source.onmessage = function (event) {
+            // Заносим сообщение в очередь
+            messageQueue.push(event.data);
+
+            // Только если в очереди больше нет сообщений, запускаем функцию для отображения сообщения
+            if (messageQueue.length === 1) {
+                displayMessage();
+            }
+        };
+
+    </script>
+</body>
+</html>

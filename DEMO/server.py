@@ -10,6 +10,14 @@ def chat_events(messages_generator):
 def index():
     return render_template('index.html')
 
+@app.route('/bar')
+def bar():
+    return render_template('commandBar.html')
+
+@app.route('/chat')
+def chat():
+    return render_template('commandChat.html')
+
 def run_server(chat_messages_generator):
     app.view_functions['chat_events'] = lambda: chat_events(chat_messages_generator)
     app.run(debug=True)

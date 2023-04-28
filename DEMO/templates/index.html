@@ -2,161 +2,143 @@
 <html>
 
 <head>
-    <title>Отклонённые команды</title>
-    <!-- Стили для html страницы -->
+    <title>Стартовая страница</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-        * {
-            box-sizing: border-box;
+        body {
             margin: 0;
             padding: 0;
+            background-color: #1d1d1d;
+            color: #fff;
+            font-family: Arial, sans-serif;
         }
 
-        html, body {
-            height: 100%;
-            width: 100%;
-            font-family: 'Montserrat', sans-serif;
-            background-color: transparent;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            overflow: hidden;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
             text-align: center;
         }
 
-        #chat {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            /* border-radius: 10px; */
-            white-space: nowrap;
-            overflow: hidden;
-            padding: 1%;
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
         }
 
-        .message {
-            font-family: 'Montserrat', sans-serif;
+        p {
+            font-size: 24px;
+            margin-bottom: 40px;
+        }
+
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .button {
             display: inline-block;
-            font-size: 1.2rem;
-            padding: 0.5% 2%;
-            border-radius: 20px;
-            background-color: rgba(255, 0, 0, 0.2);
-            color: #FFF;
-            white-space: nowrap;
-            position: absolute;
-            right: 0;
-            transform: translateX(100%);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            transform: translateX(100%);
+            padding: 12px 24px;
+            margin: 0 20px 20px 0;
+            border-radius: 30px;
+            background-color: #ff8c00;
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        @keyframes slideIn {
-            0%   { transform: translateX(100%) scale(1); opacity: 0.8; }
-            20%  { transform: translateX(0%) scale(1); opacity: 0.8; }
-            45%  { transform: translateY(-100%) scale(1.05); opacity: 0.5; }
-            69%  { transform: translateY(0%) scale(1); opacity: 0.8; }
-            100% { transform: translateX(-100%) scale(1); opacity: 0.8; }
+        .button:hover {
+            background-color: #fff;
+            color: #ff8c00;
+        }
+
+        .event-button {
+            display: block;
+            padding: 16px 32px;
+            margin-top: 40px;
+            border-radius: 30px;
+            background-color: #ff8c00;
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .event-button:hover {
+            background-color: #fff;
+            color: #ff8c00;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 10%;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          footer p {
+            margin: 0;
+          }
+                
+          footer a {
+            color: #fff;
+          }
+          
+          footer a:hover {
+            color: #ff8c00;
+          }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 10px;
+            }
+
+            h1 {
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .button-wrapper {
+                flex-direction: column;
+            }
+
+            .button {
+                margin: 0 0 20px 0;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Чат контейнер -->
-    <div id="chat"></div>
-    <!-- Скрипт для анимации сообщений и получения сообщений с сервера -->
-    <script>
-        const chat = document.getElementById("chat");
+    <div class="container">
+        <h1>Chat-To-Source Widget</h1>
+        <p>Выберите тип виджета: чат или бегущая строчка.</p>
+        <div class="button-wrapper">
+            <a href="/bar" class="button">Бегущая строчка</a>
+            <a href="/chat" class="button">Чат</a>
+        </div>
+        <a href="/events" class="event-button">DEV страница</a>
+    </div>
+    <footer>
+        <div class="container">
+            <p>Created by laVashik</p>
+            <a href="https://github.com/IaVashik/Chat-To-Source">
+                <p>GitHub repository</p>
+            </a>
+        </div>
+    </footer>
 
-        // Массив сообщений в очереди
-        const messageQueue = [];
-
-        // Флаг для определения активного сообщения
-        let messageInProcess = false;
-
-        // Функция для создания сообщений в чате и анимации их движения
-        function createMarqueeMessage(messageText) {
-            if (!messageInProcess) {
-                messageInProcess = true;
-                console.log(messageText)
-                const messageElement = document.createElement("div");
-                messageElement.classList.add("message");
-                messageElement.innerHTML = messageText;
-                chat.appendChild(messageElement);
-                const speed = 150;
-                const desiredGap = 200;
-
-                const animationDuration = (chat.offsetWidth + messageElement.offsetWidth) / speed;
-
-                const waitingPeriod = messageElement.offsetWidth / speed;
-
-                // Запуск анимации
-                setTimeout(() => {
-                    messageElement.style.animationName = "scroll";
-                    messageElement.style.animationDuration = `${animationDuration}s`;
-                    messageElement.style.animationTimingFunction = "linear";
-                    messageElement.style.animationIterationCount = "once";
-                    messageElement.style.animationFillMode = "forwards";
-                    messageElement.style.animationDelay = "0s";
-                }, 0);
-
-                setTimeout(() => {
-                    messageInProcess = false;
-                    // Запускаем следующее сообщение из очереди, если есть
-                    console.log("IM GAY")
-                    if (messageQueue.length > 0) {
-                        createMarqueeMessage(messageQueue.shift());
-                    }
-                }, (waitingPeriod + 1.36) * 1000);
-
-
-                // Удаляем сообщение после окончания анимации
-                setTimeout(() => {
-                    chat.removeChild(messageElement);
-
-                }, (animationDuration + (messageElement.offsetWidth) / speed) * 1000);
-            } else {
-                messageQueue.push(messageText);
-            }
-        }
-
-        // Получаем сообщения с сервера
-        const evtSource = new EventSource("/events");
-        evtSource.onmessage = function (event) {
-            const messageText = event.data.split(',')[0];
-            createMarqueeMessage(messageText);
-        };
-
-        // Keyframes анимации scroll
-        const style = document.createElement('style');
-        style.type = 'text/css';
-        style.innerHTML = `
-        @keyframes scroll {
-        0% {
-            transform: translateX(100%);
-            opacity: 1;
-            scale(1);
-        }
-        33% {
-            opacity: 0.6;
-            scale(0.5);
-        }
-        66% {
-            opacity: 1;
-            scale(1);
-        }
-        100% {
-            transform: translateX(calc(-100% - 100vw));
-            opacity: 0.6;
-            scale(0.5);
-        }
-    }
-    `;
-        document.head.appendChild(style);
-    </script>
 </body>
 
 </html>
