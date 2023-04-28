@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Чат стрима</title>
+    <title>Виджет с запрещенкой</title>
     <!-- Стили для html страницы -->
     <style>
         body {
@@ -40,43 +41,64 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Чат контейнер -->
     <div id="chat"></div>
     <!-- Скрипт для анимации сообщений и получения сообщений с сервера -->
     <script>
         const chat = document.getElementById("chat");
-        let rightOffset = 0;
+
+        // Массив сообщений в очереди
+        const messageQueue = [];
+
+        // Флаг для определения активного сообщения
+        let messageInProcess = false;
 
         // Функция для создания сообщений в чате и анимации их движения
         function createMarqueeMessage(messageText) {
-            const messageElement = document.createElement("div");
-            messageElement.classList.add("message");
-            messageElement.innerHTML = messageText;
-            chat.appendChild(messageElement);
-            const speed = 150;
-            const desiredGap = 200;
-    
-            const animationDuration = (chat.offsetWidth + messageElement.offsetWidth) / speed;
-    
-            const animationDelay = desiredGap / speed;
-            rightOffset += messageElement.offsetWidth + desiredGap;
-    
-            setTimeout(() => {
-                messageElement.style.right = `-${rightOffset}px`;
-                messageElement.style.animationName = "scroll";
-                messageElement.style.animationDuration = `${animationDuration}s`;
-                messageElement.style.animationTimingFunction = "linear";
-                messageElement.style.animationIterationCount = "once";
-                messageElement.style.animationFillMode = "forwards";
-                messageElement.style.animationDelay = `${animationDelay}s`;
-            }, 0);
-    
-    
-            setTimeout(() => {
-                chat.removeChild(messageElement);
-                rightOffset -= messageElement.offsetWidth + desiredGap;
-            }, (animationDuration + animationDelay + (rightOffset / speed)) * 1000);
+            if (!messageInProcess) {
+                messageInProcess = true;
+                console.log(messageText)
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("message");
+                messageElement.innerHTML = messageText;
+                chat.appendChild(messageElement);
+                const speed = 150;
+                const desiredGap = 200;
+
+                const animationDuration = (chat.offsetWidth + messageElement.offsetWidth) / speed;
+
+                const waitingPeriod = messageElement.offsetWidth / speed;
+
+                // Запуск анимации
+                setTimeout(() => {
+                    messageElement.style.animationName = "scroll";
+                    messageElement.style.animationDuration = `${animationDuration}s`;
+                    messageElement.style.animationTimingFunction = "linear";
+                    messageElement.style.animationIterationCount = "once";
+                    messageElement.style.animationFillMode = "forwards";
+                    messageElement.style.animationDelay = "0s";
+                }, 0);
+
+                setTimeout(() => {
+                    messageInProcess = false;
+                    // Запускаем следующее сообщение из очереди, если есть
+                    console.log("IM GAY")
+                    if (messageQueue.length > 0) {
+                        createMarqueeMessage(messageQueue.shift());
+                    }
+                }, (waitingPeriod + 1.36) * 1000);
+
+
+                // Удаляем сообщение после окончания анимации
+                setTimeout(() => {
+                    chat.removeChild(messageElement);
+
+                }, (animationDuration + (messageElement.offsetWidth) / speed) * 1000);
+            } else {
+                messageQueue.push(messageText);
+            }
         }
 
         // Получаем сообщения с сервера
@@ -102,4 +124,5 @@
         document.head.appendChild(style);
     </script>
 </body>
+
 </html>
