@@ -2,42 +2,64 @@
 <html>
 
 <head>
-    <title>Виджет с запрещенкой</title>
+    <title>Отклонённые команды</title>
     <!-- Стили для html страницы -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #222;
-            color: #fff;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background-color: transparent;
+            color: #ffffff;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
             margin: 0;
             overflow: hidden;
+            text-align: center;
         }
 
         #chat {
             position: relative;
-            height: 40px;
+            height: 100%;
             width: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
+            /* border-radius: 10px; */
             white-space: nowrap;
             overflow: hidden;
+            padding: 1%;
         }
 
         .message {
+            font-family: 'Montserrat', sans-serif;
             display: inline-block;
             font-size: 1.2rem;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #5DADE2;
-            color: #fff;
+            padding: 0.5% 2%;
+            border-radius: 20px;
+            background-color: rgba(255, 0, 0, 0.2);
+            color: #FFF;
             white-space: nowrap;
             position: absolute;
             right: 0;
             transform: translateX(100%);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(100%);
+        }
+
+        @keyframes slideIn {
+            0%   { transform: translateX(100%) scale(1); opacity: 0.8; }
+            20%  { transform: translateX(0%) scale(1); opacity: 0.8; }
+            45%  { transform: translateY(-100%) scale(1.05); opacity: 0.5; }
+            69%  { transform: translateY(0%) scale(1); opacity: 0.8; }
+            100% { transform: translateX(-100%) scale(1); opacity: 0.8; }
         }
     </style>
 </head>
@@ -115,9 +137,21 @@
         @keyframes scroll {
         0% {
             transform: translateX(100%);
+            opacity: 1;
+            scale(1);
+        }
+        33% {
+            opacity: 0.6;
+            scale(0.5);
+        }
+        66% {
+            opacity: 1;
+            scale(1);
         }
         100% {
             transform: translateX(calc(-100% - 100vw));
+            opacity: 0.6;
+            scale(0.5);
         }
     }
     `;
