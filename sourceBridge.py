@@ -13,7 +13,7 @@ class SourceBridge:
 
 
     def connect(self):
-        if not self.connect_netcon():
+        if not self.connect_netcon() and not self.tn:
             self.connect_hijack()
 
 
@@ -77,7 +77,7 @@ class SourceBridge:
             self.send_hijack_command(command)
        
             
-    def IsValid(self):
+    def is_valid(self):
         if not self.is_connected:
             return False
         
