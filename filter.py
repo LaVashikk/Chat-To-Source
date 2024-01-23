@@ -15,21 +15,23 @@ class Filter:
         
     def _create_regex(_, info: list):
         part = '|'.join(info) # todo
-        return re.compile(rf"\b{part}\b", re.IGNORECASE)
+        return re.compile(part, re.IGNORECASE)
     
     
     def filtrate(self, text: str):
         commands = text.split(";")
         filtered = []
+        forbidden = []
         
         for command in commands:
             for test in self.filters:
                 if test.IsBadCommand(command):
+                    forbidden.append(command)
                     break
             else:
                 filtered.append(command)
         
-        return filtered
+        return filtered, forbidden
 
 
 
