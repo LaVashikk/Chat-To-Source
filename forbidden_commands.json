@@ -1,16 +1,16 @@
 {
     "GAME_BREAKERS": ["exit", "quit", "_restart", "crash", "buildmodelforworld", "buildcubemaps", "test_", 
-            "setmodel", "editor_toggle", "vgui_runscript"], 
+            "setmodel", "editor_toggle", "vgui_runscript", "hopwire_vortex"], 
 
     "CHAOS_CREATORS": ["cpu_level", "gpu_level", "datacachesize", "alias", "createhairball", "fps_max", "mat_norendering",  
-            "sv_benchmark_force_start", "mat_fillrate", "singlestep", "exec"], 
+            "sv_benchmark_force_start", "mat_fillrate", "singlestep", "exec", "while"], 
 
     "PLAYFUNCTION_KILLERS": ["bind", "killserver", "kick", "map", "demo", "stopgame", "connect", "mat_reversedepth"], 
 
     "GAMEPLAY_HINDERERS": ["changelevel", "changelevel2", "respawn_entities", "reload", "snd_", "disconnect",     
     "kill", "restart", "explode", "sensitivity", "m_yaw", "m_pitch", "hurtmeas", "host_framerate",
-            "sv_noclip", "r_drawvgui" ], 
+            "sv_noclip", "r_drawvgui", "\\+", "-", "kill" ], 
 
     "IRRITATION_INVOKERS": ["fadeout", "viewanim", "ch_create", "explodevector", "r_drawlightinfo", 
-            "save", "load", "mat_compressedtextures", "m_rawinput", "mat_hdr_level", "fire_rocket_projectile", "pause", "r_farz","left","right","moveup","movedown","back"]
+            "save", "load", "mat_compressedtextures", "m_rawinput", "mat_hdr_level", "fire_rocket_projectile", "pause", "r_farz"]
 }
