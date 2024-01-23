@@ -12,7 +12,7 @@ def init():
     commands_filter = filter.Filter(config)
     
     game = SourceBridge()
-    if game.IsValid() is False:
+    if game.is_valid() is False:
         return exit("Could not connect to compatible Source Game.")
     
     chat = YTChat(config.get("StreamID"))
@@ -26,12 +26,18 @@ def init():
 def main(): 
     config, commands_filter, game, chat = init()
     
-    while chat.IsValid():
+    while chat.IsValid() and game.is_valid():
+        # allowed_commands = []
+        forbidden_commands = []
         for msg in chat.GetMessanges():
             message_text = msg.message
-            commands = commands_filter.filtrate(message_text)
-            for command in commands:
-                game.run(command)  
+            commands, forbidden = commands_filter.filtrate(message_text) # todo
+            print(f"DEV: {commands}")
+            game.run(commands) 
+            forbidden_commands.extend(forbidden)   #* dev code?
+        
+        if len(forbidden_commands) > 0:
+            game.run(f"say bad command: {', '.join(forbidden_commands)}")  #* dev code
             
         time.sleep(config.get("ChatInterval"))
     
