@@ -56,11 +56,14 @@ class CvarValueValidator:
         self.config = config
 
     def IsBadCommand(self, command: str) -> bool:
-        command_name = command.split()[0]
+        command_name = command.split()
+        if len(command_name) < 0:
+            return False
+        
         individual_cvars = self.config.get("INDIVIDUAL_MAX_COMMAND_VALUE")
         cvar_value = self.config.get("MaxCvarValue")
         
-        max_cvar_value = individual_cvars.get(command_name, cvar_value)
+        max_cvar_value = individual_cvars.get(command_name[0], cvar_value)
         
         for value in re.findall('\d+', command):
             if int(value) > max_cvar_value:
