@@ -1,5 +1,7 @@
 function addMessage(avatarUrl, username, message) {
   const text = message.replace(/\[red\](.*?)\[\/red\]/gi, '<span class="red">$1</span>')
+                      .replace(/\[green\](.*?)\[\/green\]/gi, '<span class="green">$1</span>')
+                      .replace(/\[yellow\](.*?)\[\/yellow\]/gi, '<span class="yellow">$1</span>')
 
   const container = document.getElementById("message-container");
 
