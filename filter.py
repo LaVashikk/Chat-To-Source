@@ -6,15 +6,20 @@ class Filter:
         bad_commands_regex = self._create_regex(config.GetBadCommand())
         bad_ents_regex = self._create_regex(config.GetBadEnts())
         
+        bad_scripts_regex = self._create_regex(config.GetBadScripts())
+        good_script_regex = self._create_regex(config.GetScriptsExceptions())
+        
         self.filters = [
             CommandFilter(bad_commands_regex),
             EntityFilter(bad_ents_regex),
+            ScriptFilter(bad_scripts_regex, good_script_regex),
             CvarValueValidator(config)
         ]
         
         
     def _create_regex(_, info: list):
-        part = '|'.join(info) # todo
+        escaped_info = [re.escape(i) for i in info]
+        part = '|'.join(escaped_info) # todo
         return re.compile(part, re.IGNORECASE)
     
     
@@ -36,19 +41,28 @@ class Filter:
 
 
 class CommandFilter:
-    def __init__(self, bad_commands_regex: list) -> None:
+    def __init__(self, bad_commands_regex: re.compile) -> None:
         self.bad_commands_regex = bad_commands_regex
 
     def IsBadCommand(self, command: str) -> bool:
-        return self.bad_commands_regex.search(command)
-    
+        return self.bad_commands_regex.search(command) # and not self.good_commands_regex.search(command)
+     
     
 class EntityFilter:
-    def __init__(self, bad_ents_regex: list) -> None:
+    def __init__(self, bad_ents_regex: re.compile) -> None:
         self.bad_ents_regex = bad_ents_regex
 
     def IsBadCommand(self, command: str) -> bool:
         return self.bad_ents_regex.search(command)
+    
+    
+class ScriptFilter:
+    def __init__(self, bad_scripts_regex: re.compile, good_script_regex: re.compile) -> None:
+        self.bad_scripts_regex = bad_scripts_regex
+        self.good_script_regex = good_script_regex
+
+    def IsBadCommand(self, command: str) -> bool:
+        return self.bad_scripts_regex.search(command) and not self.good_script_regex.search(command)
     
     
 class CvarValueValidator:
@@ -56,14 +70,14 @@ class CvarValueValidator:
         self.config = config
 
     def IsBadCommand(self, command: str) -> bool:
+        cvar_info = self.config.config["cvarLimits"]
         command_name = command.split()
-        if len(command_name) < 0:
+        
+        if len(command_name) < 0 or not cvar_info["enableFilter"]:
             return False
         
-        individual_cvars = self.config.get("INDIVIDUAL_MAX_COMMAND_VALUE")
-        cvar_value = self.config.get("MaxCvarValue")
-        
-        max_cvar_value = individual_cvars.get(command_name[0], cvar_value)
+        cvar_value = cvar_info["defaultMax"]
+        max_cvar_value = cvar_info["individualMax"].get(command_name[0], cvar_value)
         
         for value in re.findall('\d+', command):
             if int(value) > max_cvar_value:

@@ -1,19 +1,27 @@
 {
-    "LOGS_DIR": "C:/Users/matiy/Documents/Chat-To-Source/logs",
-    "StreamID":"WlgeUXlOMTc",
-    "ChatInterval": 0.100,
-    "MaxCvarValue": 256,
-    "INDIVIDUAL_MAX_COMMAND_VALUE": {"sv_gravity": 10000, "sv_noclipspeed": 10, "script": 999999},
-
+    "streamURL": "WlgeUXlOMTc",
+    "chatUpdateInterval": 0.100,
     
-    "ENABLE_GAME_BREAKERS_COMMAND": true,
-    "ENABLE_CHAOS_CREATORS_COMMAND": false,
-    "ENABLE_PLAYFUNCTION_KILLERS_COMMAND": false,
-    "ENABLE_GAMEPLAY_HINDERERS_COMMAND": false,
-    "ENABLE_IRRITATION_INVOKERS_COMMAND": false,
+    "commandFilters": {
+        "GameBreakers": true,
+        "ChaosCreators": true,
+        "GameplayKillers": true,
+        "GameplayHinderers": true,
+        "IrritationInvolves": true
+    },
 
+    "addictiveFilters": {
+        "CorruptedEntity": true,
+        "CorruptedScripts": true
+    },
 
-    "CORRUPTED_ENTITY": ["player", "worldspawn", "portal_2dbase", "generic_actor", "mortarshell", "activator", "self", 
-            "error", "blob", "world_items", "npc_hover_turret", "point_broadcastclientcommand", "env_portal_credits"],
-    "CORRUPTED_SCRIPTS": ["GetPlayer"]
+    "cvarLimits": {
+        "enableFilter": true,
+        "defaultMax": 256,
+        "individualMax": {
+            "sv_gravity": 10000, 
+            "sv_noclipspeed": 10, 
+            "script": 999999
+        }
+    }
 }
