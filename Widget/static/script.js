@@ -13,14 +13,9 @@ function addMessage(avatarUrl, username, message) {
   avatarElement.classList.add("avatar");
   messageElement.appendChild(avatarElement);
 
-  const usernameElement = document.createElement("span");
-  usernameElement.classList.add("username");
-  usernameElement.textContent = username;
-  messageElement.appendChild(usernameElement);
-
   const textElement = document.createElement("span");
   textElement.classList.add("text");
-  textElement.innerHTML = text;
+  textElement.innerHTML = '<span class="gray">' + username + '</span>' + text;
   messageElement.appendChild(textElement);
 
   container.insertBefore(messageElement, container.firstChild);

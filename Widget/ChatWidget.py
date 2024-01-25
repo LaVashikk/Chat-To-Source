@@ -38,3 +38,7 @@ class ChatWidget:
             'username': username,
             'message': message 
         })
+        
+    
+    def send_server(self, message):
+        self.send_message("https://www.icons101.com/icon_ico/id_72842/OS_X_Server.ico", "Chat-to-Source", f"[yellow]{message}[/yellow]")
