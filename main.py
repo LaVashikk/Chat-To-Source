@@ -15,7 +15,7 @@ def init():
     if game.is_valid() is False:
         return exit("Could not connect to compatible Source Game.")
     
-    chat = YTChat(config.get("StreamID"))
+    chat = YTChat(config.get("streamURL"))
     if chat.IsValid() is False:
         return exit("Incorrect stream URL.")
     
@@ -41,14 +41,11 @@ def main():
             for i in forbidden:
                 message_text = message_text.replace(i, f"[red]{i}[/red]")
             widget.send_message(msg.author.imageUrl, msg.author.name, message_text)
-            # print(f"DEV: {commands}")
         
         if len(allowed_commands) > 0:
             game.run(allowed_commands) 
         
-        if len(forbidden_commands) > 0:
-            game.run(f"say bad command: {', '.join(forbidden_commands)}")  #* dev code
-        time.sleep(config.get("ChatInterval"))
+        time.sleep(config.get("chatUpdateInterval"))
     
     widget.send_server("Offline now!")
     time.sleep(0.5)

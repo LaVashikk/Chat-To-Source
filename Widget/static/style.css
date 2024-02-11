@@ -2,7 +2,7 @@
 
 body {
     overflow: hidden;
-    background: #16161677;
+    background: #161616c0;
 }
 
 #chat-widget {
@@ -85,6 +85,6 @@ body {
 }
 
 .gray {
-  color: rgb(82, 82, 82);
+  color: rgb(141, 189, 228);
   padding-right: 10px;
 }

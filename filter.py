@@ -73,7 +73,7 @@ class CvarValueValidator:
         cvar_info = self.config.config["cvarLimits"]
         command_name = command.split()
         
-        if len(command_name) < 0 or not cvar_info["enableFilter"]:
+        if len(command_name) <= 0 or not cvar_info["enableFilter"]:
             return False
         
         cvar_value = cvar_info["defaultMax"]
