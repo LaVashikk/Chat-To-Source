@@ -1,13 +1,13 @@
 {
-    "streamURL": "WlgeUXlOMTc",
+    "streamURL": "iKJR_pj0Wu8",
     "chatUpdateInterval": 0.100,
     
     "commandFilters": {
         "GameBreakers": true,
         "ChaosCreators": true,
-        "GameplayKillers": true,
-        "GameplayHinderers": true,
-        "IrritationInvolves": true
+        "GameplayKillers": false,
+        "GameplayHinderers": false,
+        "IrritationInvolves": false
     },
 
     "addictiveFilters": {
@@ -21,7 +21,11 @@
         "individualMax": {
             "sv_gravity": 10000, 
             "sv_noclipspeed": 10, 
-            "script": 999999
+            "script": 999999,
+            "host_timescale": 10,
+            "mat_bloomscale": 10,
+            "mat_bloom_scalefactor_scalar": 2,
+            "portal2_square_portals": 160
         }
     }
 }
