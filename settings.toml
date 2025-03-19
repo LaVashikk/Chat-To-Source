@@ -1,0 +1,30 @@
+# Filters for commands based on their impact on gameplay.
+[commandFilters]
+GameBreakers = true # Commands that can crash the game or disrupt core systems.
+ChaosCreators = true # Commands that introduce unpredictability or instability.
+GameplayKillers = false # Commands that directly end or severely break gameplay.
+GameplayHinderers = false # Commands that hinder normal gameplay progression.
+IrritationInvolves = false # Commands that are more of a nuisance than a significant issue.
+
+
+# Filters for potentially harmful or corrupted scripts.
+[addictiveFilters]
+CorruptedEntity = true # Entities that are harmful or destabilizing (e.g., "worldspawn").
+CorruptedScripts = true # Scripts with malicious or unintended effects.
+
+
+# Configuration for CVAR (console variables) limitations.
+[cvarLimits]
+enableFilter = true # Enable filtering of CVAR values.
+defaultMax = 256 # Default maximum value for unspecified CVARs.
+
+
+# Individual CVAR limitations.
+[cvarLimits.individualMax]
+sv_gravity = 10000
+sv_noclipspeed = 10
+script = 999999
+host_timescale = 10
+mat_bloomscale = 10
+mat_bloom_scalefactor_scalar = 2
+portal2_square_portals = 160

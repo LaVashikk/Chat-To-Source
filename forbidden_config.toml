@@ -1,0 +1,69 @@
+[Commands]
+
+GameBreakers = [
+    "exit", "quit", "_restart", "crash", "buildmodelforworld", "buildcubemaps", "test_", 
+    "setmodel", "editor_toggle", "vgui_runscript", "hopwire_vortex", "mem_max_heapsize", "skybox_swap", 
+    "mat_softwarelighting", "sv_massreport", "r_PortalTestEnts", "scene_flush", "alias"
+]
+
+ChaosCreators = [
+    "cpu_level", "gpu_level", "datacachesize", "alias", "createhairball", "fps_max", "mat_norendering",  
+    "sv_benchmark_force_start", "mat_fillrate", "singlestep", "exec", "while", "host_sleep"
+]
+
+GameplayKillers = [
+    "bind", "killserver", "kick", "map", "demo", "stopgame", "connect", "mat_reversedepth", "mat_texture_list", 
+    "cl_ignorepackets"
+]
+
+GameplayHinderers = [
+    "changelevel", "changelevel2", "respawn_entities", "reload", "snd_", "disconnect",     
+    "kill", "restart", "explode", "sensitivity", "m_yaw", "m_pitch", "hurtmeas", "host_framerate",
+    "sv_noclip", "r_drawvgui", "+", "kill", "cl_fov", "nav_generate", "phys_timescale", "sv_speed_normal", 
+    "mat_stub"
+]
+
+IrritationInvolves = [
+    "fadeout", "viewanim", "ch_create", "explodevector", "r_drawlightinfo", 
+    "save", "load", "mat_compressedtextures", "m_rawinput", "mat_hdr_level", "fire_rocket_projectile", "pause", 
+    "r_farz", "​r_drawopaqueworld", "r_drawentities", "r_drawvgui", "sv_gravity", "r_drawworld",
+    "mat_drawTextureScale", "cl_forwardspeed", "host_timescale", "cl_sidespeed", "bug", 
+    "prop_dynamic_create"
+]
+
+
+
+[Entities]
+
+GameBreakers = [
+    "worldspawn", "portal_2dbase", "mortarshell", "info_overlay", "prop_vehicle", "npc_combine", 
+    "npc_portal_turret_floor"
+]
+
+ChaosCreators = [
+    "player", "self", "npc_hover_turret", "env_global", "func_door"
+]
+
+GameplayKillers = [
+    "generic_actor"
+]
+
+GameplayHinderers = [
+    "env_portal_credits"
+]
+
+IrritationInvolves = [
+    "activator", "world_items", "npc_personality_core"
+]
+
+
+
+[Scripts]
+
+Corrupted = [
+    "GetPlayer()", "Entities.First()"
+]
+
+Allowed = [
+    "GetPlayer().Set"
+]

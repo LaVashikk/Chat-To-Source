@@ -1,4 +1,4 @@
-import json
+import toml
 
 class ConfigManager:
     def get(self, idx, default_value = None):
@@ -14,7 +14,8 @@ class ConfigManager:
 
     def _read_config(self, path: str):
         with open(path, 'r') as file:
-            return json.load(file)
+            return toml.load(file)
+
 
 
     def _get_forbidden_elements(self, table: str):
