@@ -1,5 +1,8 @@
 # Chat2Source
 
+> [!NOTE]
+> This project is no longer maintained and is provided as-is.
+
 This project allows streamers and viewers to interact with Source Engine games (Half-Life 2, Portal, Counter-Strike, etc.) through chat commands.
 
 ## Features
@@ -184,3 +187,7 @@ debug = true
 [logging]
 level = "DEBUG"
 ```
+
+## Acknowledgments
+
+A special thanks to [damnkrat](https://github.com/damnkrat) for his help with the project.
