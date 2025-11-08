@@ -1,30 +1,31 @@
-# Filters for commands based on their impact on gameplay.
-[commandFilters]
-GameBreakers = true # Commands that can crash the game or disrupt core systems.
-ChaosCreators = true # Commands that introduce unpredictability or instability.
-GameplayKillers = false # Commands that directly end or severely break gameplay.
-GameplayHinderers = false # Commands that hinder normal gameplay progression.
-IrritationInvolves = false # Commands that are more of a nuisance than a significant issue.
+# Chat2Source Settings Configuration
 
+[stream]
+# Platform: "youtube" or "twitch"
+platform = "youtube"
+# Stream URL or identifier
+url = ""
+# Update interval in seconds
+update_interval = 1.0
 
-# Filters for potentially harmful or corrupted scripts.
-[addictiveFilters]
-CorruptedEntity = true # Entities that are harmful or destabilizing (e.g., "worldspawn").
-CorruptedScripts = true # Scripts with malicious or unintended effects.
+[widget]
+# Widget server host
+host = "127.0.0.1"
+# Widget server port
+port = 5000
+# Debug mode
+debug = false
 
+[game]
+# NetCon connection settings
+netcon_host = "127.0.0.1"
+netcon_port = 2121
+# Auto-reconnect to game
+auto_reconnect = true
 
-# Configuration for CVAR (console variables) limitations.
-[cvarLimits]
-enableFilter = true # Enable filtering of CVAR values.
-defaultMax = 256 # Default maximum value for unspecified CVARs.
+[logging]
+# Logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+level = "INFO"
+# Log format
+format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 
-
-# Individual CVAR limitations.
-[cvarLimits.individualMax]
-sv_gravity = 10000
-sv_noclipspeed = 10
-script = 999999
-host_timescale = 10
-mat_bloomscale = 10
-mat_bloom_scalefactor_scalar = 2
-portal2_square_portals = 160

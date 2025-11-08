@@ -1,1 +1,21 @@
-toml==0.10.2
+# Chat2Source Requirements
+
+# Core dependencies
+flask>=2.0.0
+flask-socketio>=5.0.0
+flask-cors>=3.0.0
+
+# Configuration
+toml>=0.10.0
+
+# Chat platforms
+pytchat>=0.5.0
+twitchio>=2.0.0
+
+# System monitoring
+psutil>=5.8.0
+
+# Optional dependencies for enhanced functionality
+requests>=2.25.0
+websockets>=10.0
+standard-telnetlib=3.13.0

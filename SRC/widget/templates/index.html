@@ -1,15 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="/static/style.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js" crossorigin="anonymous"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat2Source Widget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 </head>
 <body>
-  <div id="chat-widget">
-    <div id="message-container"></div>
-  </div>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Chat2Source</h1>
+            <div class="status-indicator">
+                <span id="status-text">Disconnected</span>
+                <div id="status-dot" class="status-dot offline"></div>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be inserted here -->
+        </div>
+        
+        <div class="chat-footer">
+            <div class="controls">
+                <button id="clear-btn" class="control-btn">Clear</button>
+                <button id="reconnect-btn" class="control-btn">Reconnect</button>
+            </div>
+        </div>
+    </div>
 
-  <script src="/static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+
